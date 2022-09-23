@@ -26,12 +26,12 @@
 """
 深拷贝
 """
-import copy
-
-test_dict = {'key1': 'val1', 'key2': [1, 2, 3]}  # 可变容器
-new_dict = copy.deepcopy(test_dict)
-print("test_dict的内存地址:", id(test_dict))
-print("new_dict的内存地址 :", id(new_dict))
-test_dict['key2'].append(4)
-print("test_dict:", test_dict)
-print("new_dict:", new_dict)
+# import copy
+#
+# test_dict = {'key1': 'val1', 'key2': [1, 2, 3]}  # 可变容器
+# new_dict = copy.deepcopy(test_dict)
+# print("test_dict的内存地址:", id(test_dict))
+# print("new_dict的内存地址 :", id(new_dict))
+# test_dict['key2'].append(4)
+# print("test_dict:", test_dict)
+# print("new_dict:", new_dict)
