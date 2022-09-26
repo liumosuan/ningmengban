@@ -11,6 +11,7 @@ class HandleExcel:
         self.wb_obj = load_workbook(filename=filename)
         # 获取sheet
         self.sheet_obj = self.wb_obj.worksheets[sheet_name]
+        # self.sheet_obj = self.wb_obj[sheet_name]
 
     def get_excel_test_cases(self):
         # 用于存储每对字典的值
@@ -35,5 +36,6 @@ class HandleExcel:
 
 # 单元测试
 if __name__ == '__main__':
+    # data = HandleExcel(filename="接口测试用例.xlsx", sheet_name="1.登录")
     data = HandleExcel(filename="接口测试用例.xlsx", sheet_name=0)
     data.get_excel_test_cases()
