@@ -3,6 +3,7 @@
 (作业提交形式：py文件。每一题请带上题目，再是代码。
 一定要代码执行成功之后，再上交py文件。)
 """
+from decimal import Decimal
 
 """
 题目
@@ -31,7 +32,8 @@ weight = input("请输入橘子重量：")
 """
 price = input("请输入橘子价格：")
 weight = input("请输入橘子重量：")
-print("买橘子的价钱为：", float(price) * float(weight))
+# print("买橘子的价钱为：", float(price) * float(weight))
+print("买橘子的价钱为：", Decimal(price) * Decimal(weight))
 
 """
 题目
