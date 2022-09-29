@@ -38,10 +38,10 @@ print(list_test)
 # list_test.clear()
 # print(list_test)
 
-# 排序
+# 排序    一般是对数字进行排序
 # 升序
 list_test.sort()
 print(list_test)
-# 降序
+# 倒序
 list_test.reverse()
 print(list_test)
