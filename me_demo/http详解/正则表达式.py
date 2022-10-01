@@ -6,9 +6,34 @@
 二、使用
     1.单字符匹配
     2.多字符匹配
+    3.边界值   ^匹配以什么开头    $匹配以什么结尾
+    4.分组匹配
 """
 import re
 
+# 分组匹配
+
+# 接口响应结果
+response = {"key1": "value1", "key2": "value2"}
+# 要去接口响应结果里面提取key
+test_demo = '{"#key1#": "value1", "#key2#": "value2"}'
+res = re.findall("#(\w.+?)#", test_demo)
+print(res)
+for i in res:
+    print(response[i])
+
+# 边界值
+# $ 匹配以什么结尾
+# test_str = "hello python"
+# res = re.findall("on$", test_str)
+# print(res)
+
+# # ^ 匹配以什么开头
+# test_str = "hello python"
+# res = re.findall("^he", test_str)
+# print(res)
+
+##################################################################################
 """
 多字符匹配
 *   匹配前一个字符出现0次或者无限次，即可有可无【贪婪模式】
@@ -17,9 +42,27 @@ import re
 ?   匹配前一个字符出现0次或者1次，即要么有1次，要么没有；【非贪婪模式】
     举例：匹配 htts re='https?'
 {n} 匹配前一个字符连续出现n次
-{m} 匹配前一个字符连续出现从m到n次，【至少出现m次，最多出现n次】    【省略n，匹配前一个字符中至少】
+{m,n} 匹配前一个字符连续出现从m到n次，【至少出现m次，最多出现n次】    【省略n，匹配前一个字符中至少】
 """
+# {m} 匹配前一个字符连续出现从m到n次，【至少出现m次，最多出现n次】
+# test_str = "go goo gooo goooo"
+# print(re.findall("go{1,3}", test_str))
+# # ['go', 'goo', 'gooo', 'gooo']
 
+# # {n} 匹配前一个字符连续出现n次
+# test_str = "go goo gooo goooo"
+# print(re.findall("go{2}", test_str))
+# # ['goo', 'goo', 'goo']
+
+# #?   匹配前一个字符出现0次或者1次，即要么有1次，要么没有；【非贪婪模式】
+# test_str = "go goo gooo goooo"
+# print(re.findall("gooo?", test_str))
+# # ['goo', 'gooo', 'gooo']
+
+# # +   匹配前一个字符出现1次或者无限次，即至少有1次匹配一个字符串;【贪婪模式】
+# test_str = "go goo gooo goooo"
+# print(re.findall("goo+", test_str))
+# # ['goo', 'gooo', 'goooo']
 
 # * 为匹配返回为空，最后一位会多匹配一次
 # test_str = "pythonppython"
