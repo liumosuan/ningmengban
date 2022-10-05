@@ -30,7 +30,7 @@ debug(调试) < info(程序正常运行输出的日志) < warning(警告) < erro
     %(levelno)s         日志级别对应的数值
     %(levelname)s       日志级别的名称Text logging level for the message ("DEBUG", "INFO",
                         "WARNING", "ERROR", "CRITICAL")
-    %(pathname)s        输出日志的文件的绝对路径
+    %(pathname)s        输出日志的文件的绝对路径(有.py后缀)
     %(filename)s        输出日志的py文件对应的名称(有.py后缀)
     %(module)s          输出日志的py文件对应的名称(没有.py后缀)
     %(lineno)d          输出日志的行数
@@ -43,36 +43,60 @@ debug(调试) < info(程序正常运行输出的日志) < warning(警告) < erro
     %(threadName)s      输出日志的线程名称
     %(process)d         输出日志的进程id
     %(message)s         日志内容
+
+六、使用
+# try:
+#     py55.debug(msg="这里是日志信息debug")
+#     py55.info(msg="这里是日志信息info")
+#     py55.warning(msg="这里是日志信息warning")
+# except Exception as e:
+#     py55.error(msg="这里是日志信息error")
 """
 import logging
 from pprint import pprint
+from logging import handlers
 
 import requests
 
 # 设置默认的日志级别(root收集器的日志级别)
 # logging.basicConfig(level=logging.DEBUG)
 # data = {"key1": "value1", "key2": "value2"}
-# res = requests.get(url="http://httpbin.org/get", params=data)
-# pprint(res.json())
+# response = requests.get(url="http://httpbin.org/get", params=data)
+# pprint(response.json())
 # 1.创建日志收集器
 py55 = logging.getLogger(name="py55")
+
 # 2.创建日志收集渠道
 # 创建一个控制台
 pycharm = logging.StreamHandler()
+# 文件xxx.log,一直往一个文件里面写
+file = logging.FileHandler(filename="py55.log", mode="w")
+# 日志切割，秒、分、时、日、月、周
+# filename:文件名称(如果不是当前路径要带上绝对路径)
+# when='h':日期滚动周期(切割周期)
+# interval:when的单位
+# backupCount:保留多少个日志文件，自动删除之前的文件
+handlers.TimedRotatingFileHandler(filename="test.log", when="D",
+                                  interval=1, encoding='utf-8')
 # 3.创建日志格式
 # 时间-渠道名称-日志级别名称-输出日志文件的绝对路径-函数名称-日志信息
 fmt = "【%(asctime)s-%(name)s-%(levelname)s-%(pathname)s-%(funcName)s】>>>:%(message)s"
 pycharm_fmt = logging.Formatter(fmt=fmt)
+
 # 4.渠道绑定日志格式
 pycharm.setFormatter(fmt=pycharm_fmt)
+file.setFormatter(fmt=pycharm_fmt)
+
 # 5.日志收集器设置日志级别
 # 渠道的日志级别要比收集器的日志级别高;如果没有收集器，渠道就找不到日志
 # 如果只设置日志收集器的日志级别，渠道会继承日志收集器的日志级别
 
 # 收集器>>> 收集某个级别的日志
 py55.setLevel(level=logging.WARNING)  # 日志收集器设置级别
+# file.setLevel(level=logging.WARNING)
 # 渠道>>> 去收集器中过滤渠道需要的日志级别的日志，然后输出
-pycharm.setLevel(level=logging.INFO)  # 渠道日志级别
+# pycharm.setLevel(level=logging.CRITICAL)  # 渠道日志级别
+
 # 6.给日志收集器绑定渠道
 py55.addHandler(pycharm)
 
@@ -81,4 +105,13 @@ py55.debug(msg="这里是日志信息debug")
 py55.info(msg="这里是日志信息info")
 py55.warning(msg="这里是日志信息warning")
 py55.error(msg="这里是日志信息error")
+# py55.error(msg="".format(response))
 py55.critical(msg="这里是日志信息critical")
+
+# 使用
+# try:
+#     py55.debug(msg="这里是日志信息debug")
+#     py55.info(msg="这里是日志信息info")
+#     py55.warning(msg="这里是日志信息warning")
+# except Exception as e:
+#     py55.error(msg="这里是日志信息error")
