@@ -33,11 +33,16 @@ class Login:
         }
         res = requests.post(url=self.login_url, json=params)
         cookie = res.headers["set-cookie"]  # 获取cookies信息，用于鉴权
-        self.header["Cookie"] = cookie      # 把cookie塞到请求头中
+        self.header["Cookie"] = cookie  # 把cookie塞到请求头中
+        return res.cookies  # 返回响应结果中的cookies对象
 
     def get_qurey_url(self):
-        self.login()
-        res = requests.get(self.qurey_url, headers=self.header)
+        # self.login()
+        cookies = self.login()
+        # res = requests.get(self.qurey_url, headers=self.header)
+        # 直接通过cookies关键字来传递cookies，必须传cookies对象，不是字符串
+        res = requests.get(self.qurey_url, cookies=cookies)
+        print("请求头:", res.request.headers)
         print(res.text)
 
 
