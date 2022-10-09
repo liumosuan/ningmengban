@@ -1,6 +1,6 @@
 import requests
 from requests_toolbelt.multipart import MultipartEncoder
-from me_demo.py55Api.api.test_1_login import Manage
+from me_demo.py55Api.api.manage.test_1_login import Manage
 
 
 class UpLoadImage:

@@ -2,7 +2,6 @@ import time
 import uuid
 import requests
 from jsonpath import jsonpath
-from me_demo.py55Api.api.test_2_image_code import ImageCode
 
 
 class Manage:
