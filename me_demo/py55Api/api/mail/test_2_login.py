@@ -18,8 +18,8 @@ class Login:
         res = requests.post(url=self.login_url, json=data)
         print(res.json())
         # jsonpath返回的是一个list，所以要取值
-        self.header["Authorization"] = jsonpath(res.json(), "$..access_token")[0]
-        print("header:", self.header)
+        self.header["Authorization"] = "bearer{}".format(jsonpath(res.json(), "$..access_token")[0])
+        # print("header:", self.header)
         return self.header
 
 
