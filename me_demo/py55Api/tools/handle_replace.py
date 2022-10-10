@@ -53,8 +53,6 @@ class HandleReplace:
             self.__get_data_and_set_attribute(key=key, user_info=user_info)
             pass
 
-    #  获取参数，不同的数据，来源是不是不一样，然后设置为类属性
-
     def replace_data(self, data):
         """
         思路：
