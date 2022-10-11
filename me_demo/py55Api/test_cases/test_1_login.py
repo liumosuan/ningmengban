@@ -21,17 +21,16 @@ class TestLogin(unittest.TestCase):
     def setUpClass(cls) -> None:
         # 请求头
         cls.header = {"Content-Type": "application/json;charset=UTF-8", "locale": "zh-cn"}
-        cls.handle_replace = HandleReplace()    # 参数替换类的初始化-
+        cls.handle_replace = HandleReplace()  # 参数替换类的初始化-
 
     @data(*case_data)  # [{},{}]    数据要进行解包操作，因为case_data是list类型的数据，解包之后就是dict类型
     def test_login(self, case):
-        print("case的类型：", type(case))
-        print("url:", case["url"])
-        print("url的类型:", type(case["url"]))
+        # print("case的类型：", type(case))  # dict
+        # print("url:", case["url"])
+        # print("url的类型:", type(case["url"]))  # str
         # 参数替换，请求参数替换，删除空格、换行符
-        self.handle_replace.replace_data(data=case["data"])
-
-        # requests.post(url="", json="", headers=self.header)
+        new_data = self.handle_replace.replace_data(data=case["data"])
+        # requests.post(url="", json=new_data, headers=self.header)
 
 
 if __name__ == '__main__':

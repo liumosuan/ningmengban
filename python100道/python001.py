@@ -1,17 +1,21 @@
+# -*- coding:utf-8 -*-
 """
-题目000：找出字符串s=”aaabbbccceeefff111144444″中，字符出现次数最多的字符
+题目001：有四个数字：1、2、3、4，能组成多少个互不相同且无重复数字的三位数？各是多少？
 """
-str1 = "aaabbbccceeefff111144444"
-# 将字符串变为list,然后再转为set去重，减少循环次数
-list_str1 = list(str1)
-set_str1 = set(list_str1)
-# 统计字符出现的次数
+# count = 0
+# for i in range(1, 5):
+#     for j in range(1, 5):
+#         for k in range(1, 5):
+#             if (i != j) and (i != k) and (k != j):
+#                 count += 1
+# print(count)
+import itertools
+
+# 将1-4全排列后强转为list赋给list_test
+# itertools.permutations(需要全排列的数据,几个为一组)
+list_test = list(itertools.permutations([1, 2, 3, 4], 3))
 count = 0
-# 挑出出现次数最多的字符
-max_str = None
-for i in set_str1:
-    result = list_str1.count(i)
-    if result > count:
-        count = result
-        max_str = i
-print("出现次数最多的字符为：{};".format(max_str), "出现次数为：{}次".format(count))
+for i in list_test:
+    # print(i)
+    count += 1
+print(count)

@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
+import time
 import uuid
-import requests
 import re
+import ast
 
 from me_demo.py55Api.conf.setting import user_info
 from me_demo.py55Api.tools.handle_attribute import HandleAttr
@@ -34,24 +35,23 @@ class HandleReplace:
         if key in user_info:
             # 取出来设置为类属性
             setattr(HandleAttr, key, str(user_info[key]))
-        elif key == "session_UUID":
+        elif key == "sessionUUID":
             # 特殊处理，通过脚本生成session_UUID
             setattr(HandleAttr, key, str(uuid.uuid4()))
 
     # 调用数据来源设置属性方法，设置类属性
     def __set_attribute(self, key_list):
         """
-
-        :param key_list:["username","session_UUID"]
+        :param key_list:["username","sessionUUID"]
         :return:
         """
+        # 只对excel请求参数进行属性设置
         for key in key_list:
             # key的值的来源配置文件
             # 通过脚本生成的数据
             # 响应结果
             # 数据库
             self.__get_data_and_set_attribute(key=key, user_info=user_info)
-            pass
 
     def replace_data(self, data):
         """
@@ -68,12 +68,18 @@ class HandleReplace:
         new_data = self.__handle_str(data=data)
         # 获取需要替换的参数名称,返回类型为list
         key_list = self.__get_replace_keys(data=new_data)
+        print("需要替换的参数名称：", key_list)
         if len(key_list) > 0:
             # 当len(key_list)>0  说明参数里面需要替换数据
-            # 获取参数，设置类属性
+            # 获取参数，设置类属性,无返回值
             self.__set_attribute(key_list=key_list)
-
-            pass
+            # 从类属性中通过key_list里面的key获取值，然后替换请求参数
+            for key in key_list:
+                new_data=new_data.replace(f"#{key}#", str(getattr(HandleAttr, key)))
+            print("new_data的数据类型：", type(new_data))
+            new_data = ast.literal_eval(new_data)
+            new_data["t"] = int(time.time() * 1000)
+            return new_data
         else:
             print("不需要替换数据")
 
