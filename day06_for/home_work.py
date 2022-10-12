@@ -36,24 +36,27 @@
 题目3：用户输入月份,判断这个月是哪个季节(for循环实现)
 """
 
-# try:
-#     month = int(input("请输入月份："))
-#     for i in range(1, 13):
-#         if month == i:
-#             if 1 <= i <= 3:
-#                 print("这是春季")
-#                 break
-#             elif 4 <= i <= 6:
-#                 print("这是夏季")
-#                 break
-#             elif 7 <= i <= 9:
-#                 print("这是秋季")
-#                 break
-#             else:
-#                 print("这是冬季")
-#                 break
-# except Exception as e:
-#     print("输入的不是正确月份！")
+try:
+    month = int(input("请输入月份："))
+    if month in range(1,13):
+        for i in range(1, 13):
+            if month == i:
+                if 1 <= i <= 3:
+                    print("这是春季")
+                    break
+                elif 4 <= i <= 6:
+                    print("这是夏季")
+                    break
+                elif 7 <= i <= 9:
+                    print("这是秋季")
+                    break
+                else:
+                    print("这是冬季")
+                    break
+    else:
+        print("这不是自然月！")
+except Exception as e:
+    print("输入的不是正确月份！")
 
 """
 题目4：编写如下程序：
