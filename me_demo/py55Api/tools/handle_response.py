@@ -41,7 +41,7 @@ class HandleResponse(unittest.TestCase):
                     # f"$..{key}"的意思就是要找到和expected_data中key一样的key
                     # jsonpath返回的是一个list，所以要索引取值
                     actual_data[key] = jsonpath(response, f"$..{key}")[0]
-                    print("actual_data:",actual_data[key])
+                    # print("actual_data:", actual_data[key])
                 self.assertEqual(expected_data, actual_data)
             else:
                 for key in expected_data:

@@ -22,7 +22,7 @@ class HandleReplace:
         print("替换前的data:", data)
         for str_data in ["\n", " "]:
             data = data.replace(str_data, "")
-        print("替换后的data:", data)
+        # print("替换后的data:", data)
         return data
 
     # 获取需要替换参数的名称
@@ -37,7 +37,7 @@ class HandleReplace:
             setattr(HandleAttr, key, str(user_info[key]))
         elif key == "sessionUUID":
             # 特殊处理，通过脚本生成session_UUID
-            print("str(uuid.uuid4()):", type(str(uuid.uuid4())))
+            # print("str(uuid.uuid4()):", type(str(uuid.uuid4())))
             setattr(HandleAttr, key, str(uuid.uuid4()))
 
     # 调用数据来源设置属性方法，设置类属性
@@ -79,10 +79,10 @@ class HandleReplace:
                 # 从类属性中通过key_list里面的key获取值，然后替换请求参数
                 for key in key_list:
                     new_data = new_data.replace(f"#{key}#", str(getattr(HandleAttr, key)))
-                print("new_data的数据类型：", type(new_data))
+                # print("new_data的数据类型：", type(new_data))
                 new_data = ast.literal_eval(new_data)
                 new_data["t"] = int(time.time() * 1000)
-                print("new_data:", new_data)
+                # print("new_data:", new_data)
                 return new_data
             else:
                 print("不需要替换数据")

@@ -23,7 +23,7 @@ price = xxx
 
 优惠价格：xxx 元
 """
-s="ss"
+s = "ss"
 s.isdigit()
 price = input("price = ")
 try:
@@ -59,7 +59,30 @@ try:
     if ((year % 4 == 0) and (year % 100 != 0)) or (year % 400 == 0):
         print(f"{year}年是闰年")
     else:
-        print(f"{year}年是不是闰年")
+        print(f"{year}年不是闰年")
 
 except Exception as e:
     print(f"{year}不是有效年份")
+
+"""
+
+题目3：求三个整数中的最大值
+
+提示：可定义3个变量，然后比大小
+"""
+# 方法1
+# list_num = [20, 15, 19]
+# list_num.sort()
+# print(list_num[-1])
+# 方法2
+num1 = 9
+num2 = 16
+num3 = 19
+max_num = num1
+if num1 < num2:
+    max_num = num2
+    if num1 < num3:
+        max_num = num3
+if num3 < num2:
+    max_num = num2
+print(max_num)
