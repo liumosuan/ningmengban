@@ -10,10 +10,11 @@ class UpLoadImage:
 
     def upload_image(self):
         headers = self.login.login()  # 调用鉴权
-        image = open(r"C:\Users\Luck\Desktop\paoche.jpeg", mode="rb")  # 读取图片要以二进制进行读取
+        image = open(r"C:\Users\31909\Desktop\paoche.jpeg", mode="rb")  # 读取图片要以二进制进行读取
         data = MultipartEncoder(fields={
             # "file":("图片的名称","图片的二进制流","Content-Type")
             "file": ("paoche.jpeg", image, "image/jpeg")
+            # "file": ("paoche.jpeg",r"C:\Users\31909\Desktop\paoche.jpeg", "image/jpeg")
         })
         # 请求头处理
         headers["Content-Type"] = data.content_type

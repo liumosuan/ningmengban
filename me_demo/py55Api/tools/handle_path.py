@@ -11,3 +11,6 @@ print("base_dir:", base_dir)
 # 测试数据路径
 data_dir = os.path.join(base_dir, "test_data", "case_data.xlsx")
 print(data_dir)
+
+# 图片路径
+image_dir = os.path.join(base_dir, "images", "paoche.jpeg")
