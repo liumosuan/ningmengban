@@ -42,7 +42,8 @@ class TestLogin(unittest.TestCase):
         # # 响应结果处理
         # new_response = self.handle_response.handle_response(res)
         # print("处理后的response:", new_response)
-        new_response = self.handle_requests.send_requests(method=case["method"], url=case["url"], data=new_data)
+        new_response = self.handle_requests.send_requests(method=case["method"], url=case["url"], data=new_data,
+                                                          is_upload=case["is_upload"])
 
         # 3、断言
         self.handle_response.assert_response(expected_data=case["expect_data"], response=new_response)
