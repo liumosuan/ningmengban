@@ -4,7 +4,7 @@ import uuid
 import re
 import ast
 
-from me_demo.py55Api.conf.setting import user_info
+from me_demo.py55Api.conf.setting import user_info, assert_db_info
 from me_demo.py55Api.tools.handle_attribute import HandleAttr
 from me_demo.py55Api.tools.handle_excel import HandleExcel
 from me_demo.py55Api.tools.handle_path import data_dir
@@ -89,6 +89,33 @@ class HandleReplace:
         else:
             print("data中没有数据，不需要替换。")
             return {}
+
+    def replace_sql(self, sql, assert_db_info):
+        # 获取需要替换的参数的名称，返回类型list
+        key_list = self.__get_replace_keys(data=sql)
+        # 当len(key_list)>0说明 参数里面需要替换数据
+        if len(key_list) > 0:
+            # 获取key的值，然后设置为类属性
+            for key in key_list:
+                self.__get_data_and_set_attribute(key=key, user_info=assert_db_info)
+            # 从类属性中查询key的值，再替换
+            for key in key_list:
+                sql = sql.replace(f"#{key}#", str(getattr(HandleAttr, key)))
+            return sql
+        else:
+            print("不需要替换sql")
+            return sql
+
+
+
+
+
+
+
+
+
+
+
 
     # 线性脚本
     def replace_data_demo(self, data, user_info):

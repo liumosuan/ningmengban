@@ -15,12 +15,17 @@ class HandleRequests:
 
     def __handle_headers(self):
         # 拿属性时，如果属性中有"access_token"这个name
+        # hasattr() 函数用于判断对象是否包含对应的属性。  如果对象有该属性返回 True，否则返回 False。
+        # hasattr(object, name)
+        # object -- 对象。
+        # name -- 字符串，属性名。
         if hasattr(HandleAttr, "access_token"):
             token = getattr(HandleAttr, "access_token")
             self.headers["Authorization"] = "bearer{}".format(token)
         else:
             print("这个接口不需要鉴权！")
 
+    # 图片上传请求接口
     def __upload_images(self, method, url):
         with open(file=image_dir, mode="rb") as image:
             from_data = MultipartEncoder(fields={
@@ -28,13 +33,13 @@ class HandleRequests:
                 "file": (image_info["file_name"], image, image_info["file_type"])
             })
             self.headers["Content-Type"] = from_data.content_type
-            print("self.headers", self.headers)
+            # print("self.headers", self.headers)
             response = requests.request(method=method, url=url, data=from_data, headers=self.headers)
         self.headers["Content-Type"] = "application/json;charset=UTF-8"
         return response
 
     def send_requests(self, method, url, data, is_upload):
-        self.__handle_headers()  # 请求头处理
+        self.__handle_headers()  # 鉴权请求头处理
         if str(is_upload) == "1":
             # 图片上传接口
             response = self.__upload_images(method=method, url=url)
@@ -43,5 +48,6 @@ class HandleRequests:
         else:
             # 普通接口，需要token，和不需要token
             response = requests.request(method=method, url=url, json=data, headers=self.headers)
+            # 将响应结果转换成dict
             new_response = self.handle_response.handle_response(response=response)
             return new_response

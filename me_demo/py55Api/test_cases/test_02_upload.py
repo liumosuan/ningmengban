@@ -41,10 +41,13 @@ class TestUpload(unittest.TestCase):
 
         print("处理后的response:", new_response)
         # 3、断言
-        self.handle_response.assert_response(expected_data=case["expect_data"], response=new_response)
+        self.handle_response.assert_response(expected_data=case["expected_data"], response=new_response)
 
         # 4、提取全局变量
         self.handle_extract.handle_extract(extract_data=case["extract_data"], response=new_response)
+
+        # 5、数据断言
+
 
 
 if __name__ == '__main__':
