@@ -49,6 +49,5 @@ class TestUpload(unittest.TestCase):
         # 5、数据断言
 
 
-
 if __name__ == '__main__':
     unittest.main()
