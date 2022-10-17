@@ -24,13 +24,23 @@ class HandleDb:
         self.cur.close()  # 关闭游标
         self.db.close()  # 关闭数据库连接
 
-    # 获取数据
+    # 获取数据,sql查询到什么，我们就返回什么
     def get_datas(self, sql):
+        value_list = []  # 用于装载sql执行结果的value值
         self.cur.execute(sql)  # 通过游标执行sql语句
-        result = self.cur.fetchall()  # 获取执行sql的结果
-        print("sql执行结果：", sql)
-        self.db_close()
+        result = self.cur.fetchall()  # 获取执行sql的结果,result为list类型
+        # print("sql执行结果：", result, type(result))
+        for i in result:  # i是一个字典
+            for value in i.values():  # 遍历result的值
+                value_list.append(value)
+        # self.db_close()
+        print("value_list:", value_list)
+        return value_list
 
 
+mysql = HandleDb(db_info=db_info)
 if __name__ == '__main__':
-    cl = HandleDb()
+    cl = HandleDb(db_info=db_info)
+    # sql = "SELECT *FROM tz_attach_file WHERE file_path = '2022/10/aef158d110cb41cfada39d19fd393efc.jpeg'"
+    sql = "SELECT count(*) FROM tz_attach_file WHERE file_path = '2022/10/aef158d110cb41cfada39d19fd393efc.jpeg'"
+    cl.get_datas(sql=sql)

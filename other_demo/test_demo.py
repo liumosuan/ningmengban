@@ -10,6 +10,20 @@
 #         print("输入的不是自然月！")
 # except Exception as e:
 #     print("输入的数据不是正确的月份！")
+#
+# import keyword
+# print(keyword.kwlist)
 
-import keyword
-print(keyword.kwlist)
+def remove_element(a_list: list):
+    new_list = a_list
+    for i in new_list[:]:
+        if new_list.count(i)>1:
+            new_list.remove(i)
+    return new_list
+
+
+if __name__ == '__main__':
+    list_test = [10, 1, 2, 20, 10, 3, 2, 1, 15, 20, 44, 56, 3, 2, 1]
+    print("list_test:", list_test)
+    new_list = remove_element(list_test)
+    print("new_list:", new_list)

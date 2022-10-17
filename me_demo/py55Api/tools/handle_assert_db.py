@@ -1,10 +1,13 @@
 # -*- coding:utf-8 -*-
-"""
-数据库断言
-"""
+
 import ast
 
 from me_demo.py55Api.tools.handle_replace import HandleReplace
+from me_demo.py55Api.tools.handle_db import mysql  # 导实例
+
+"""
+数据库断言
+"""
 
 
 class HandleAssertDb:
@@ -23,13 +26,16 @@ class HandleAssertDb:
     def __init__(self):
         # 参数替换类
         self.handle_replace = HandleReplace()
+        # 数据库操作
+        # self.handle_db = HandleDb(db_info=db_info)
 
     # 删除换行和空格
     def __handle_str(self, data: str):
-        for i in ["\n", " "]:
+        for i in ["\n"]:
             data = data.replace(i, "")
         return data
 
+    # 数据库断言
     def assert_db(self, assert_db, assert_db_info):
         """
         :param assert_db:(str) assert_db是excel中assert_db字段
@@ -37,16 +43,18 @@ class HandleAssertDb:
         :return:
         """
         if assert_db:
-            # 删除空格和换行
+            # 删除换行
             assert_db = self.__handle_str(data=assert_db)
             # 数据类型转换，将assert_db(str)转换成dict
             assert_db = assert_db if isinstance(assert_db, dict) else ast.literal_eval(assert_db)
             # 期望结果
-            extract_data = assert_db["extract_data"]
+            expected_data = assert_db["expected_data"]
             sql = assert_db["actual_data"]  # sql语句
             # 替换sql语句中的数据
             new_sql = self.handle_replace.replace_sql(sql=sql, assert_db_info=assert_db_info)
-            # 执行sql语句，获取sql
-
+            # 执行sql语句，获取sql执行结果
+            sql_result = mysql.get_datas(sql=new_sql)
+            # 断言期望结果与实际结果是否相等
+            assert expected_data == sql_result[0]
         else:
             print("excel中assert_db字段为空，不需要做数据库断言")

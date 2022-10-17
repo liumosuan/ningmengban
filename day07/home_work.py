@@ -78,6 +78,17 @@ class Test1:
 
 三、dict
     dict为无序、可变类型
+    1、字典的格式是{"key":"value"}
+    2、字典的key不能重复，如果字典key重复，就会将之前的key给覆盖掉
+    3、字典的key要使用不可变类型：元组、字符串;    字典、list不能作为字典的key
+    4、查：字典的数据查找是通过key来查找的，例如：dict_test={"key1":"value1","key2":"value2",}
+        查找value2这个值，可以使用dict_test["key2"]
+    5、修改：dict_test["key1"]="val1"   通过key来修改值
+    6、增加：dict_test["key3"]="val3"
+    7、删除：dict_test.pop("key1")      通过key来删除值
+    8、查看所有key   dict_test.keys()
+    9、查看所有的value    dict_test.values()
+    10、获取kv键值对,以元组形式  dict_test.items()
 """
 
 
