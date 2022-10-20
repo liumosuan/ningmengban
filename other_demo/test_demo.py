@@ -28,15 +28,5 @@
 #     new_list = remove_element(list_test)
 #     print("new_list:", new_list)
 
-def multifly(num):
-    j = 1
-    for i in num:
-        j = int(i) * j
-    return j % 20
-
-
-# rt = list(input("请输入数字："))
-# val=multifly(rt)
-# print(val)
-rt = multifly(list(input("请输入数字：")))
-print(rt)
+test_str="123"
+print("{}".format(test_str))
