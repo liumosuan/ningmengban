@@ -20,6 +20,7 @@ class HandleExcel:
         datas = list(self.sheet_obj.iter_rows(values_only=True))
         case_title = datas[0]  # 表头
         case_datas = datas[1:]  # 数据
+        print(case_title)
         # print(case_title)
         # print(case_datas)
         for case in case_datas:
