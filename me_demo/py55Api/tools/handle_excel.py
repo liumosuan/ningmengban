@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 from openpyxl.reader.excel import load_workbook
-from me_demo.py55Api.tools.handle_path import data_dir
 
 class HandleExcel:
     def __init__(self, filename, sheet_name):
@@ -29,9 +28,7 @@ class HandleExcel:
 
 
 if __name__ == '__main__':
-    # data = HandleExcel(filename=r"D:\Pycharm\ningmengban\me_demo\py55Api\test_data\case_data.xlsx",
-    #                    sheet_name=0)
-    data = HandleExcel(filename=data_dir,
+    data = HandleExcel(filename=r"D:\Pycharm\ningmengban\me_demo\py55Api\test_data\case_data.xlsx",
                        sheet_name=0)
     data.get_excel_test_cases()
     data.close_excel()
