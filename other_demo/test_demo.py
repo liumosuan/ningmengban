@@ -80,14 +80,14 @@
 #         if j>1:
 #             break
 
-with open(file="cases.txt", mode="r", encoding="utf-8") as f:
-    datas = f.readlines()  # 读数据，datas为list
-    result_list = []  # 结果list
-    for i in datas:
-        result_dict = {}    # 用于装临时的kv
-        i = i.strip('\n')  # 删除换行
-        dict_list = i.split('@')  # 先将数据分割，然后用来接收每个字典的kv
-        for j in dict_list:
-            result_dict.setdefault(j.split(':')[0], j.split(':')[1])
-        result_list.append(result_dict)
-print(result_list)
+# with open(file="cases.txt", mode="r", encoding="utf-8") as f:
+#     datas = f.readlines()  # 读数据，datas为list
+#     result_list = []  # 结果list
+#     for i in datas:
+#         result_dict = {}    # 用于装临时的kv
+#         i = i.strip('\n')  # 删除换行
+#         dict_list = i.split('@')  # 先将数据分割，然后用来接收每个字典的kv
+#         for j in dict_list:
+#             result_dict.setdefault(j.split(':')[0], j.split(':')[1])
+#         result_list.append(result_dict)
+# print(result_list)
