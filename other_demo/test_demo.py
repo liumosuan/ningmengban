@@ -91,3 +91,12 @@
 #             result_dict.setdefault(j.split(':')[0], j.split(':')[1])
 #         result_list.append(result_dict)
 # print(result_list)
+
+import ast
+
+# test_str="123"
+# print(type(test_str))
+# print(type(ast.literal_eval(test_str)))
+demo = "{'key':'val'}"
+print(type(demo))
+print(type(ast.literal_eval(demo)))
